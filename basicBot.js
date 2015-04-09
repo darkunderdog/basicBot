@@ -54,7 +54,7 @@
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://rawgit.com/Yemasthui/basicBot/master/lang/langIndex.json", function (json) {
+        $.get("https://rawgit.com/darkunderdog/basicBot/master/lang/langIndex.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
@@ -174,7 +174,7 @@
         return m;
     };
 
-    var botCreator = "Matthew (Yemasthui)";
+    var botCreator = "Matthew (darkunderdog)";
     var botMaintainer = "Benzi (Quoona)"
     var botCreatorIDs = ["3851534", "4105209"];
 
@@ -183,22 +183,22 @@
         status: false,
         name: "basicBot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/Yemasthui/basicBot/master/basicBot.js",
+        scriptLink: "https://rawgit.com/darkunderdog/basicBot/master/basicBot.js",
         cmdLink: "http://git.io/245Ppg",
-        chatLink: "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
+        chatLink: "https://rawgit.com/darkunderdog/basicBot/master/lang/en.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
         retrieveFromStorage: retrieveFromStorage,
         settings: {
-            botName: "basicBot",
+            botName: "AmiiboBot",
             language: "english",
-            chatLink: "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
+            chatLink: "https://rawgit.com/darkunderdog/basicBot/master/lang/en.json",
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
-            startupEmoji: false, // true or false
+            startupEmoji: true, // true or false
             cmdDeletion: true,
-            maximumAfk: 120,
+            maximumAfk: 45,
             afkRemoval: true,
             maximumDc: 60,
             bouncerPlus: true,
@@ -208,13 +208,13 @@
             maximumLocktime: 10,
             cycleGuard: true,
             maximumCycletime: 10,
-            voteSkip: false,
-            voteSkipLimit: 10,
+            voteSkip: true,
+            voteSkipLimit: 5,
             historySkip: false,
             timeGuard: true,
-            maximumSongLength: 10,
+            maximumSongLength: 6,
             autodisable: true,
-            commandCooldown: 30,
+            commandCooldown: 5,
             usercommandsEnabled: true,
             lockskipPosition: 3,
             lockskipReasons: [
@@ -263,7 +263,7 @@
             ],
             afkpositionCheck: 15,
             afkRankCheck: "ambassador",
-            motdEnabled: false,
+            motdEnabled: true,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
             filterChat: true,
@@ -280,8 +280,8 @@
             songstats: true,
             commandLiteral: "!",
             blacklists: {
-                NSFW: "https://rawgit.com/Yemasthui/basicBot-customization/master/blacklists/ExampleNSFWlist.json",
-                OP: "https://rawgit.com/Yemasthui/basicBot-customization/master/blacklists/ExampleOPlist.json"
+                NSFW: "https://rawgit.com/darkunderdog/basicBot-customization/master/blacklists/ExampleNSFWlist.json",
+                OP: "https://rawgit.com/darkunderdog/basicBot-customization/master/blacklists/ExampleOPlist.json"
             }
         },
         room: {
