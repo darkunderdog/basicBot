@@ -180,7 +180,7 @@
 
     var basicBot = {
         version: "2.3.4",
-        status: false,
+        status: true,
         name: "AmiiboBot",
         loggedInID: null,
         scriptLink: "https://rawgit.com/darkunderdog/basicBot/master/basicBot.js",
