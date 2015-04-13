@@ -1111,7 +1111,7 @@
                 if (chat.message.indexOf('!gif') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 60 * 1000) {
+                        if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 15 * 1000) {
                             API.moderateDeleteChat(chat.cid);
                             return void (0);
                         }
