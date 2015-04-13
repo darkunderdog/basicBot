@@ -1108,7 +1108,7 @@
                     }
                 }
                 
-                if (chat.message === '!gif') {
+                if (chat.message.indexOf('!gif') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 60 * 1000) {
