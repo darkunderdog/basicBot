@@ -1619,7 +1619,7 @@
 
             ballCommand: {
                 command: ['8ball', 'ask'],
-                rank: 'residentdj',
+                rank: 'user',
                 type: 'startsWith',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -1786,7 +1786,7 @@
 
             cookieCommand: {
                 command: 'cookie',
-                rank: 'residentdj',
+                rank: 'user',
                 type: 'startsWith',
                 cookies: ['has given you a chocolate chip cookie!',
                     'has given you a soft homemade oatmeal cookie!',
