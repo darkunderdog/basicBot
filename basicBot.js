@@ -1128,7 +1128,7 @@
                             API.moderateDeleteChat(chat.cid);
                             return void (0);
                         }
-                        else u.lastGif = Date.now();
+                        else u.last8ball = Date.now();
                     }
                 }
                 
@@ -1139,7 +1139,7 @@
                             API.moderateDeleteChat(chat.cid);
                             return void (0);
                         }
-                        else u.lastGif = Date.now();
+                        else u.lastCookie = Date.now();
                     }
                 }
                 
