@@ -277,6 +277,7 @@
             website: null,
             intervalMessages: [],
             messageInterval: 5,
+            rouletteInterval: null,
             songstats: true,
             commandLiteral: "!",
             blacklists: {
@@ -1140,6 +1141,16 @@
                             return void (0);
                         }
                         else u.lastCookie = Date.now();
+                    }
+                }
+                
+                if (chat.message === '!roulette') {
+                    if (userPerm < 2) {
+                        if (rouletteInterval !== null && (Date.now() - rouletteInterval) < 1 * 60 * 60 * 1000) {
+                            API.moderateDeleteChat(chat.cid);
+                            return void (0);
+                        }
+                        else rouletteInterval = Date.now();
                     }
                 }
                 
