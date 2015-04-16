@@ -369,6 +369,8 @@
             };
             this.lastEta = null;
             this.lastGif = null;
+            this.last8ball = null;
+            this.lastCookie = null;
             this.afkWarningCount = 0;
             this.afkCountdown = null;
             this.inRoom = true;
@@ -1111,13 +1113,36 @@
                 if (chat.message.indexOf('!gif') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 15 * 1000) {
+                        if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
                             return void (0);
                         }
                         else u.lastGif = Date.now();
                     }
                 }
+                
+                if (chat.message.indexOf('!8ball') >= 0) {
+                    if (userPerm < 2) {
+                        var u = basicBot.userUtilities.lookupUser(chat.uid);
+                        if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 10 * 1000) {
+                            API.moderateDeleteChat(chat.cid);
+                            return void (0);
+                        }
+                        else u.lastGif = Date.now();
+                    }
+                }
+                
+                if (chat.message.indexOf('!cookie') >= 0) {
+                    if (userPerm < 2) {
+                        var u = basicBot.userUtilities.lookupUser(chat.uid);
+                        if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 10 * 1000) {
+                            API.moderateDeleteChat(chat.cid);
+                            return void (0);
+                        }
+                        else u.lastGif = Date.now();
+                    }
+                }
+                
                 var executed = false;
 
                 for (var comm in basicBot.commands) {
