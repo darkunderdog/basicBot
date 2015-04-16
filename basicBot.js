@@ -277,7 +277,6 @@
             website: null,
             intervalMessages: [],
             messageInterval: 5,
-            rouletteInterval: null,
             songstats: true,
             commandLiteral: "!",
             blacklists: {
@@ -334,6 +333,7 @@
             newBlacklistedSongFunction: null,
             roulette: {
                 rouletteStatus: false,
+                rouletteInterval: null,
                 participants: [],
                 countdown: null,
                 startRoulette: function () {
@@ -1146,11 +1146,11 @@
                 
                 if (chat.message === '!roulette') {
                     if (userPerm < 2) {
-                        if (rouletteInterval !== null && (Date.now() - rouletteInterval) < 1 * 60 * 60 * 1000) {
+                        if (basicBot.room.roulette.rouletteInterval !== null && (Date.now() - basicBot.room.roulette.rouletteInterval) < 1 * 60 * 60 * 1000) {
                             API.moderateDeleteChat(chat.cid);
                             return void (0);
                         }
-                        else rouletteInterval = Date.now();
+                        else basicBot.room.roulette.rouletteInterval = Date.now();
                     }
                 }
                 
