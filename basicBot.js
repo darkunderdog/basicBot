@@ -1149,7 +1149,7 @@
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var time = Math.round(((1*60*10*1000)-(Date.now() - u.lastCookie))/60/1000);
-                        var diff = duration - (((Date.now() - u.lastCookie) / 1000) | 0);
+                        var diff = (60*10) - (((Date.now() - u.lastCookie) / 1000) | 0);
         		// does the same job as parseInt truncates the float
         		var minutes = (diff / 60) | 0;
         		var seconds = (diff % 60) | 0;
