@@ -1136,10 +1136,10 @@
                 if (chat.message.indexOf('!cookie') >= 0) {
                     if (userPerm < 8) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        var time = Math.round((Date.now() - u.lastCookie));
+                        var time = Math.round((u.lastCookie - Date.now()));
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
                             /**API.moderateDeleteChat(chat.cid); **/
-                            API.sendChat("[!cookie] " + u.username + " you must wait " + time + " more minutes");
+                            API.sendChat("[!cookie] " + u.username + " you must wait " + time + " more minutes (test1)");
                             return void (0);
                         }
                         else u.lastCookie = Date.now();
