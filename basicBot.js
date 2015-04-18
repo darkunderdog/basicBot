@@ -2205,6 +2205,7 @@
 							if (typeof id !== 'undefined') {
                                     					API.sendChat(":heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat:");
 									API.sendChat("/me http://media.giphy.com/media/"+ id +"/giphy.gif");
+									API.sendChat(subChat(basicBot.chat.validgifrandom, {name: chat.un, id: id}));
 									API.sendChat(":cat: :octocat: :cat2:");
 							} else {
 								API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
