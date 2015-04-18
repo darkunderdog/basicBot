@@ -2203,10 +2203,7 @@
 						var rating = ""; // PG 13 gifs
 						get_random_id(api_key, function(id) {
 							if (typeof id !== 'undefined') {
-                                    					API.sendChat(":heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat:");
-									API.sendChat("/me http://media.giphy.com/media/"+ id +"/giphy.gif");
-									API.sendChat(subChat(basicBot.chat.validgifrandom, {name: chat.un, id: id}));
-									API.sendChat(":cat: :octocat: :cat2:");
+									API.sendChat(subChat(":heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat: http://media.giphy.com/media/%%ID%%/giphy.gif :cat: :octocat: :cat2:", {id: id}));
 							} else {
 								API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
 								u.lastGif = null;
