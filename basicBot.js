@@ -2203,7 +2203,9 @@
 						var rating = ""; // PG 13 gifs
 						get_random_id(api_key, function(id) {
 							if (typeof id !== 'undefined') {
-								API.sendChat(subChat(basicBot.chat.validgifrandom, {name: chat.un, id: id}));
+                                    API.sendChat(":heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat:");
+									API.sendChat(id);
+									API.sendChat(":cat: :octocat: :cat2:");
 							} else {
 								API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
 								u.lastGif = null;
