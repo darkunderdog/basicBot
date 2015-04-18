@@ -1140,6 +1140,7 @@
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
                             /**API.moderateDeleteChat(chat.cid); **/
                             API.sendChat("[!cookie] " + u.username + " you must wait " + time + " more minutes");
+                            API.sendChat("Debug: " + Date.now() - u.lastCookie)
                             return void (0);
                         }
                         else u.lastCookie = Date.now();
