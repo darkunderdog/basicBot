@@ -1114,8 +1114,10 @@
                 if (chat.message.indexOf('!gif') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
+                        var time = Math.round(((1*60*10*1000)-(Date.now() - u.lastCookie))/60/1000);
                         if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
+                            API.sendChat("[!gif] @" + u.username + " you must wait " + time + " more minutes");
                             return void (0);
                         }
                         else u.lastGif = Date.now();
@@ -1125,8 +1127,10 @@
                 if (chat.message.indexOf('!8ball') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
+                        var time = Math.round(((1*60*10*1000)-(Date.now() - u.lastCookie))/60/1000);
                         if (u.last8ball !== null && (Date.now() - u.last8ball) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
+                            API.sendChat("[!8ball] @" + u.username + " you must wait " + time + " more minutes");
                             return void (0);
                         }
                         else u.last8ball = Date.now();
@@ -1134,12 +1138,12 @@
                 }
                 
                 if (chat.message.indexOf('!cookie') >= 0) {
-                    if (userPerm < 8) {
+                    if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var time = Math.round(((1*60*10*1000)-(Date.now() - u.lastCookie))/60/1000);
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
-                            /**API.moderateDeleteChat(chat.cid); **/
-                            API.sendChat("[!cookie] " + u.username + " you must wait " + time + " more minutes");
+                            API.moderateDeleteChat(chat.cid);
+                            API.sendChat("[!cookie] @" + u.username + " you must wait " + time + " more minutes");
                             return void (0);
                         }
                         else u.lastCookie = Date.now();
@@ -1148,8 +1152,11 @@
                 
                 if (chat.message === '!roulette') {
                     if (userPerm < 2) {
+                    	var u = basicBot.userUtilities.lookupUser(chat.uid);
+                    	var time = Math.round(((1*60*60*1000)-(Date.now() - u.lastCookie))/60/1000);
                         if (basicBot.room.roulette.rouletteInterval !== null && (Date.now() - basicBot.room.roulette.rouletteInterval) < 1 * 60 * 60 * 1000) {
                             API.moderateDeleteChat(chat.cid);
+                            API.sendChat("[!roulette] @" + u.username + " you must wait " + time + " more minutes");
                             return void (0);
                         }
                         else basicBot.room.roulette.rouletteInterval = Date.now();
