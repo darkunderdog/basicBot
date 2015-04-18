@@ -1136,7 +1136,6 @@
                 if (chat.message.indexOf('!cookie') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        var user = basicBot.userUtilities.lookupUserName(name);
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
                             return void (0);
