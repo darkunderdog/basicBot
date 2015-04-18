@@ -2172,6 +2172,46 @@
                     }
                 }
             },
+			
+			 kittyCommand: {
+                command: ['kitty', 'meow'],
+                rank: 'user',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    var u = basicBot.userUtilities.lookupUser(chat.uid);	
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+						function get_random_id(api_key, func)
+						{
+							$.getJSON(
+								"https://api.giphy.com/v1/gifs/random?", 
+								{ 
+									"format": "json",
+									"api_key": api_key,
+									"rating": rating,
+									"tag": "kitty"
+								},
+								function(response)
+								{
+									func(response.data.id);
+								}
+								)
+						}
+						var api_key = "dc6zaTOxFJmzC"; // public beta key
+						var rating = ""; // PG 13 gifs
+						get_random_id(api_key, function(id) {
+							if (typeof id !== 'undefined') {
+								API.sendChat(subChat(basicBot.chat.validgifrandom, {name: chat.un, id: id}));
+							} else {
+								API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
+								u.lastGif = null;
+							}
+						});
+                    }
+                }
+            },
 
             helpCommand: {
                 command: 'help',
