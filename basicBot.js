@@ -1082,6 +1082,14 @@
                     }, 2 * 1000, chat.cid);
                     return true;
                 }
+                
+                if (msg.indexOf('you must wait') > -1) {
+                    setTimeout(function (id) {
+                    	API.moderateDeleteChat(chat.cid);
+                    }, 2 * 1000, chat.cid);
+                    return true;
+                }
+                
                 return false;
             },
             commandCheck: function (chat) {
