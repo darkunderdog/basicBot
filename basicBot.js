@@ -1138,7 +1138,7 @@
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var time = Math.round((Date.now() - u.lastCookie))
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
-                            API.moderateDeleteChat(chat.cid);
+                            /**API.moderateDeleteChat(chat.cid); **/
                             API.sendChat("[!cookie] " + name + " you must wait " + time + " more minutes");
                             return void (0);
                         }
