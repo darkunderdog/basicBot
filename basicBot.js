@@ -2207,7 +2207,7 @@
 							} else {
 								API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
 								u.lastGif = null;
-							}
+							} 
 						});
                     }
                 }
