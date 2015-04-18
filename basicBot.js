@@ -1139,7 +1139,6 @@
                         var user = basicBot.userUtilities.lookupUserName(name);
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
-                            API.sendChat('+ user + ' you need to wait 10mins form the last time you used !cookie');
                             return void (0);
                         }
                         else u.lastCookie = Date.now();
