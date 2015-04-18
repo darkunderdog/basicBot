@@ -2137,6 +2137,7 @@
                                     API.sendChat(subChat(basicBot.chat.validgiftags, {name: chat.un, id: id, tags: commatag}));
                                 } else {
                                     API.sendChat(subChat(basicBot.chat.invalidgiftags, {name: chat.un, tags: commatag}));
+                                    u.lastGif = null;
                                 }
                             });
                         }
@@ -2163,6 +2164,7 @@
                                     API.sendChat(subChat(basicBot.chat.validgifrandom, {name: chat.un, id: id}));
                                 } else {
                                     API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
+                                    u.lastGif = null;
                                 }
                             });
                         }
