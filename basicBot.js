@@ -1134,7 +1134,7 @@
                     }
                 }
                 
-                if (chat.message.indexOf('!kitty') >= 0 || chat.message.indexOf('!meow') >= 0)  {
+                if (chat.message.indexOf('!kitty') >= 0 || chat.message.indexOf('!meow') >= 0)  { 
                     if (userPerm < 10) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var diff = (60*10) - (((Date.now() - u.lastGif) / 1000) | 0);
