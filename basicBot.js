@@ -1127,7 +1127,7 @@
         		var seconds = (diff % 60) | 0;
                         if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
-                            API.sendChat("[!gif] @" + u.username + " you must wait " + minutes + ":" + seconds);
+                            API.sendChat("[!gif] @" + u.username + " you must wait " + minutes + ":" + seconds + " minutes.");
                             return void (0);
                         }
                         else u.lastGif = Date.now();
@@ -1135,14 +1135,14 @@
                 }
                 
                 if (chat.message.indexOf('!kitty') >= 0 || chat.message.indexOf('!meow') >= 0)  {
-                    if (userPerm < 10) {
+                    if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var diff = (60*10) - (((Date.now() - u.lastGif) / 1000) | 0);
         		var minutes = (diff / 60) | 0;
         		var seconds = (diff % 60) | 0;
                         if (u.lastGif !== null && (Date.now() - u.lastGif) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
-                            API.sendChat("[!kitty / !meow] @" + u.username + " you must wait " + minutes + ":" + seconds);
+                            API.sendChat("[!kitty / !meow] @" + u.username + " you must wait " + minutes + ":" + seconds + " minutes.");
                             return void (0);
                         }
                         else u.lastGif = Date.now();
@@ -1157,7 +1157,7 @@
         		var seconds = (diff % 60) | 0;
                         if (u.last8ball !== null && (Date.now() - u.last8ball) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
-                            API.sendChat("[!8ball] @" + u.username + " you must wait " + minutes + ":" + seconds);
+                            API.sendChat("[!8ball] @" + u.username + " you must wait " + minutes + ":" + seconds + " minutes.");
                             return void (0);
                         }
                         else u.last8ball = Date.now();
@@ -1172,7 +1172,7 @@
         		var seconds = (diff % 60) | 0;
                         if (u.lastCookie !== null && (Date.now() - u.lastCookie) < 1 * 60 * 10 * 1000) {
                             API.moderateDeleteChat(chat.cid);
-                            API.sendChat("[!cookie] @" + u.username + " you must wait " + minutes + ":" + seconds);
+                            API.sendChat("[!cookie] @" + u.username + " you must wait " + minutes + ":" + seconds + " minutes.");
                             return void (0);
                         }
                         else u.lastCookie = Date.now();
@@ -1187,7 +1187,7 @@
         		var seconds = (diff % 60) | 0;
                         if (basicBot.room.roulette.rouletteInterval !== null && (Date.now() - basicBot.room.roulette.rouletteInterval) < 1 * 60 * 60 * 1000) {
                             API.moderateDeleteChat(chat.cid);
-                            API.sendChat("[!roulette] @" + u.username + " you must wait " + minutes + ":" + seconds);
+                            API.sendChat("[!roulette] @" + u.username + " you must wait " + minutes + ":" + seconds + " minutes.");
                             return void (0);
                         }
                         else basicBot.room.roulette.rouletteInterval = Date.now();
