@@ -883,19 +883,6 @@
 
             var lastplay = obj.lastPlay;
             if (typeof lastplay === 'undefined') return;
-            if (basicBot.settings.songstats) {
-                if (typeof basicBot.chat.songstatistics === "undefined") {
-                    API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
-                }
-                else {
-                    API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
-                }
-            }
-            basicBot.room.roomstats.totalWoots += lastplay.score.positive;
-            basicBot.room.roomstats.totalMehs += lastplay.score.negative;
-            basicBot.room.roomstats.totalCurates += lastplay.score.grabs;
-            basicBot.room.roomstats.songCount++;
-            basicBot.roomUtilities.intervalMessage();
             if (basicBot.room.CWWoots === lastplay.score.positive && basicBot.room.CWCurates > lastplay.score.grabs) {
             	var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
             	basicBot.room.CWWoots = lastplay.score.positive;
@@ -914,6 +901,20 @@
                 basicBot.room.CWName = u.username;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.CWName, cwsongname: basicBot.room.CWSongName, cwwoots: basicBot.room.CWWoots, cwcurates: basicBot.room.CWCurates, cwmehs: basicBot.room.CWMehs}));
             }
+            
+            if (basicBot.settings.songstats) {
+                if (typeof basicBot.chat.songstatistics === "undefined") {
+                    API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
+                }
+                else {
+                    API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
+                }
+            }
+            basicBot.room.roomstats.totalWoots += lastplay.score.positive;
+            basicBot.room.roomstats.totalMehs += lastplay.score.negative;
+            basicBot.room.roomstats.totalCurates += lastplay.score.grabs;
+            basicBot.room.roomstats.songCount++;
+            basicBot.roomUtilities.intervalMessage();
             basicBot.room.currentDJID = obj.dj.id;
             
             var mid = obj.media.format + ':' + obj.media.cid;
