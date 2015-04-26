@@ -1591,6 +1591,31 @@
                     }
                 }
             },
+            
+            CurrentWinnerCommand: {
+                command: 'currentwinner',
+                rank: 'user',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                    	var u = basicBot.userUtilities.lookupUser(chat.uid);
+                    	var currentwinner = basicBot.room.CWName;
+                    	var song = basicBot.room.CWSongName;
+                    	var woots = basicBot.room.CWWoots;
+                        var mehs = basicBot.room.CWMehs;
+                        var grabs = basicBot.room.CWCurates;
+                    		if (currentwinner === "") {
+					API.sendChat("/me No Current Winner");
+                    		}
+                    		else {
+                    			API.sendChat(subChat(basicBot.settings.currentwinner, {cwname:currentwinner, cwsongname: song, cwwoots: woots, cwcurates: grabs, cwmehs: mehs}));
+                    		}
+                 
+                         }
+                }
+            },
 
             afktimeCommand: {
                 command: 'afktime',
