@@ -297,6 +297,11 @@
             autoskip: false,
             autoskipTimer: null,
             autodisableInterval: null,
+            CWWoots: 0,
+            CWCurates: 0,
+            CWMehs: 0,
+            CWName: null,
+            CWSongName: null,
             autodisableFunc: function () {
                 if (basicBot.status && basicBot.settings.autodisable) {
                     API.sendChat('!afkdisable');
@@ -314,11 +319,6 @@
                 totalWoots: 0,
                 totalCurates: 0,
                 totalMehs: 0,
-                CWWoots: 0,
-                CWCurates: 0,
-                CWMehs: 0,
-                CWName: "",
-                CWSongName: "",
                 launchTime: null,
                 songCount: 0,
                 chatmessages: 0
@@ -896,24 +896,24 @@
             basicBot.room.roomstats.totalCurates += lastplay.score.grabs;
             basicBot.room.roomstats.songCount++;
             basicBot.roomUtilities.intervalMessage();
-            	if (basicBot.room.roomstats.CWWoots === lastplay.score.positive && lastplay.score.grabs > lastplay.score.grabs) {
-            		var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
-            	 	basicBot.room.roomstats.CWWoots = lastplay.score.positive;
-                	basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
-                	basicBot.room.roomstats.CWMehs = lastplay.score.negative;
-                	basicBot.room.roomstats.CWSongName = lastplay.media.title;
-                	basicBot.room.roomstats.CWName = u.username;
-                	API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
-            	}
-            	if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
-            		var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
-            	 	basicBot.room.roomstats.CWWoots = lastplay.score.positive;
-                	basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
-                	basicBot.room.roomstats.CWMehs = lastplay.score.negative;
-                	basicBot.room.roomstats.CWSongName = lastplay.media.title;
-                	basicBot.room.roomstats.CWName = u.username;
-                	API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
-            	}
+            if (basicBot.room.CWWoots === lastplay.score.positive && basicBot.room.CWCurates > lastplay.score.grabs) {
+            	var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
+            	basicBot.room.CWWoots = lastplay.score.positive;
+                basicBot.room.CWCurates = lastplay.score.grabs;
+                basicBot.room.CWMehs = lastplay.score.negative;
+                basicBot.room..CWSongName = lastplay.media.title;
+                basicBot.room.CWName = u.username;
+                API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.CWName, cwsongname: basicBot.room.CWSongName, cwwoots: basicBot.room.CWWoots, cwcurates: basicBot.room.CWCurates, cwmehs: basicBot.room.CWMehs}));
+            }
+            if (basicBot.room.CWWoots < lastplay.score.positive) {
+            	var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
+            	basicBot.room.CWWoots = lastplay.score.positive;
+                basicBot.room.CWCurates = lastplay.score.grabs;
+                basicBot.room.CWMehs = lastplay.score.negative;
+                basicBot.room..CWSongName = lastplay.media.title;
+                basicBot.room.CWName = u.username;
+                API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.CWName, cwsongname: basicBot.room.CWSongName, cwwoots: basicBot.room.CWWoots, cwcurates: basicBot.room.CWCurates, cwmehs: basicBot.room.CWMehs}));
+            }
             basicBot.room.currentDJID = obj.dj.id;
             
             var mid = obj.media.format + ':' + obj.media.cid;
@@ -2660,11 +2660,11 @@
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                     	var u = basicBot.userUtilities.lookupUser(chat.uid);
-                    	basicBot.room.roomstats.CWName = "";
-                    	basicBot.room.roomstats.CWSongName = "";
-                    	basicBot.room.roomstats.CWWoots = 0;
-                    	basicBot.room.roomstats.CWCurates = 0;
-                    	basicBot.room.roomstats.CWMehs = 0;
+                    	basicBot.room.CWName = "";
+                    	basicBot.room.CWSongName = "";
+                    	basicBot.room.CWWoots = 0;
+                    	basicBot.room.CWCurates = 0;
+                    	basicBot.room.CWMehs = 0;
 			API.sendChat("/me Current Winner Reset");
                          }
                 }
