@@ -896,8 +896,7 @@
             basicBot.room.roomstats.totalCurates += lastplay.score.grabs;
             basicBot.room.roomstats.songCount++;
             basicBot.roomUtilities.intervalMessage();
-            if (basicBot.room.roomstats.CWWoots <= lastplay.score.positive) {
-            	if (basicBot.room.roomstats.CWWoots === lastplay.score.positive && lastplay.score.grabs > basicBot.room.roomstats.CWCurates) {
+            	if (basicBot.room.roomstats.CWWoots === lastplay.score.positive && lastplay.score.grabs > lastplay.score.grabs) {
             		var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
             	 	basicBot.room.roomstats.CWWoots = lastplay.score.positive;
                 	basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
@@ -906,7 +905,7 @@
                 	basicBot.room.roomstats.CWName = u.username;
                 	API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             	}
-            	else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
+            	if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
             		var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
             	 	basicBot.room.roomstats.CWWoots = lastplay.score.positive;
                 	basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
@@ -915,7 +914,6 @@
                 	basicBot.room.roomstats.CWName = u.username;
                 	API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             	}
-            }
             basicBot.room.currentDJID = obj.dj.id;
             
             var mid = obj.media.format + ':' + obj.media.cid;
