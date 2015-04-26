@@ -897,7 +897,7 @@
             basicBot.room.roomstats.songCount++;
             basicBot.roomUtilities.intervalMessage();
             if (basicBot.room.roomstats.CWWoots <= lastplay.score.positive) {
-            	if ((basicBot.room.roomstats.CWWoots === lastplay.score.positive && lastplay.score.grabs > basicBot.room.roomstats.CWCurates) || basicBot.room.roomstats.CWWoots < lastplay.score.positive {
+            	if ((basicBot.room.roomstats.CWWoots === lastplay.score.positive && lastplay.score.grabs > basicBot.room.roomstats.CWCurates) || basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
             		var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
             	 	basicBot.room.roomstats.CWWoots = lastplay.score.positive;
                 	basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
