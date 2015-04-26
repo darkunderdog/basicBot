@@ -1606,7 +1606,7 @@
                     	var woots = basicBot.room.CWWoots;
                         var mehs = basicBot.room.CWMehs;
                         var grabs = basicBot.room.CWCurates;
-                    		if (currentwinner === "") {
+                    		if (currentwinner === "" || currentwinner === null) {
 					API.sendChat("/me No Current Winner");
                     		}
                     		else {
