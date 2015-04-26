@@ -114,10 +114,10 @@
                 basicBot.room.mutedUsers = room.mutedUsers;
                 basicBot.room.autoskip = room.autoskip;
                 basicBot.room.roomstats = room.roomstats;
+                basicbot.room.CW = room.CW;
                 basicBot.room.messages = room.messages;
                 basicBot.room.queue = room.queue;
                 basicBot.room.newBlacklisted = room.newBlacklisted;
-                basicbot.room.CW = room.CW;
                 API.chatLog(basicBot.chat.datarestored);
             }
         }
