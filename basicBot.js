@@ -2218,7 +2218,7 @@
 						var rating = ""; // PG 13 gifs
 						get_random_id(api_key, function(id) {
 							if (typeof id !== 'undefined') {
-									API.sendChat(subChat(":heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat: http://media.giphy.com/media/%%ID%%/giphy.gif :cat: :octocat: :cat2:", {id: id}));
+									API.sendChat(subChat("[%%NAME%%] :heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat: http://media.giphy.com/media/%%ID%%/giphy.gif :cat: :octocat: :cat2:", {name: u.username, id: id}));
 							} else {
 								API.sendChat(subChat(basicBot.chat.invalidgifrandom, {name: chat.un}));
 								u.lastGif = null;
@@ -2634,7 +2634,8 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-			API.sendChat('/me Current Winner: ' + basicBot.settings.motd);
+                    	var u = basicBot.userUtilities.lookupUser(chat.uid);
+			API.sendChat('/me [' + u.username +'] Current Winner: ' + basicBot.settings.motd);
                          }
                 }
             },
