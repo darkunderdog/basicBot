@@ -901,7 +901,7 @@
             	basicBot.room.CWWoots = lastplay.score.positive;
                 basicBot.room.CWCurates = lastplay.score.grabs;
                 basicBot.room.CWMehs = lastplay.score.negative;
-                basicBot.room..CWSongName = lastplay.media.title;
+                basicBot.room.CWSongName = lastplay.media.title;
                 basicBot.room.CWName = u.username;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.CWName, cwsongname: basicBot.room.CWSongName, cwwoots: basicBot.room.CWWoots, cwcurates: basicBot.room.CWCurates, cwmehs: basicBot.room.CWMehs}));
             }
@@ -910,7 +910,7 @@
             	basicBot.room.CWWoots = lastplay.score.positive;
                 basicBot.room.CWCurates = lastplay.score.grabs;
                 basicBot.room.CWMehs = lastplay.score.negative;
-                basicBot.room..CWSongName = lastplay.media.title;
+                basicBot.room.CWSongName = lastplay.media.title;
                 basicBot.room.CWName = u.username;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.CWName, cwsongname: basicBot.room.CWSongName, cwwoots: basicBot.room.CWWoots, cwcurates: basicBot.room.CWCurates, cwmehs: basicBot.room.CWMehs}));
             }
