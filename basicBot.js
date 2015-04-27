@@ -317,7 +317,7 @@
                 launchTime: null,
                 songCount: 0,
                 chatmessages: 0,
-				CWWoots: 0,
+		CWWoots: 0,
             	CWCurates: 0,
             	CWMehs: 0,
             	CWName: null,
@@ -892,7 +892,7 @@
                 basicBot.room.roomstats.CWName = u.username;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             }
-            if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
+            else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
             	var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
 		basicBot.room.roomstats.CWWoots = lastplay.score.positive;
                 basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
@@ -901,8 +901,7 @@
                 basicBot.room.roomstats.CWName = u.username;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             }
-            
-            if (basicBot.settings.songstats && basicBot.room.roomstats.CWWoots > lastplay.score.positive) {
+            else if (basicBot.settings.songstats) {
                 if (typeof basicBot.chat.songstatistics === "undefined") {
                     API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
                 }
