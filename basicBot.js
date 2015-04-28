@@ -2734,7 +2734,7 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-			API.sendChat(subChat("[%%NAME%%] Number Of Users In Audience: %%COUNT%%", {name: chat.un, count: basicBot.room.roomstats.CWRatio}));
+			API.sendChat(subChat("[%%NAME%%] Woot Ratio: %%RATIO%% - # Of Woots: %%WOOT%% - # Of Audience Members: %%AUDIENCE%% - # Of Grabs: %%GRAB%%", {name: chat.un, ratio: basicBot.room.roomstats.CWRatio, woot: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience, grab: basicBot.room.roomstats.CWCurates}));
                     }
                 }
             },
