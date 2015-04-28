@@ -2728,8 +2728,8 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-						var ratio =  (obj.lastPlay.score.positive/ API.getAudience().length)
-						API.sendChat(subChat("[%%NAME%%] Number Of Users In Audience: %%COUNT%%", {name: chat.un, count: ratio}));
+			var ratio =  (obj.lastPlay.score.positive/ API.getAudience().length);
+			API.sendChat(subChat("[%%NAME%%] Number Of Users In Audience: %%COUNT%%", {name: chat.un, count: ratio}));
                     }
                 }
             },
