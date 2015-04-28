@@ -324,7 +324,7 @@
             	CWName: null,
             	CWSongName: null,
             	CWAudience: 0,
-        	CWRatio: = 0
+        	CWRatio: 0
             },
             messages: {
                 from: [],
