@@ -894,7 +894,7 @@
                 basicBot.room.roomstats.CWSongName = lastplay.media.title;
                 basicBot.room.roomstats.CWName = u.username;
         	basicBot.room.roomstats.CWAudience = API.getAudience().length;
-        	basicBot.room.roomstats.CWRatio = API.getAudience().length/lastplay.score.positive;
+        	basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             }
             else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
@@ -905,7 +905,7 @@
                 basicBot.room.roomstats.CWSongName = lastplay.media.title;
                 basicBot.room.roomstats.CWName = u.username;
                 basicBot.room.roomstats.CWAudience = API.getAudience().length;
-        	basicBot.room.roomstats.CWRatio = API.getAudience().length/lastplay.score.positive;
+        	basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             }
             else if (basicBot.settings.songstats) {
