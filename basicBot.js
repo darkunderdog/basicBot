@@ -322,7 +322,9 @@
             	CWCurates: 0,
             	CWMehs: 0,
             	CWName: null,
-            	CWSongName: null
+            	CWSongName: null,
+            	CWAudience: 0,
+        	CWRatio: = 0
             },
             messages: {
                 from: [],
@@ -891,6 +893,8 @@
                 basicBot.room.roomstats.CWMehs = lastplay.score.negative;
                 basicBot.room.roomstats.CWSongName = lastplay.media.title;
                 basicBot.room.roomstats.CWName = u.username;
+        	basicBot.room.roomstats.CWAudience = API.getAudience().length;
+        	basicBot.room.roomstats.CWRatio = API.getAudience().length/lastplay.score.positive;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             }
             else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
@@ -900,6 +904,8 @@
                 basicBot.room.roomstats.CWMehs = lastplay.score.negative;
                 basicBot.room.roomstats.CWSongName = lastplay.media.title;
                 basicBot.room.roomstats.CWName = u.username;
+                basicBot.room.roomstats.CWAudience = API.getAudience().length;
+        	basicBot.room.roomstats.CWRatio = API.getAudience().length/lastplay.score.positive;
                 API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
             }
             else if (basicBot.settings.songstats) {
@@ -2728,8 +2734,7 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-			var ratio =  (obj.lastPlay.score.positive/ API.getAudience().length);
-			API.sendChat(subChat("[%%NAME%%] Number Of Users In Audience: %%COUNT%%", {name: chat.un, count: ratio}));
+			API.sendChat(subChat("[%%NAME%%] Number Of Users In Audience: %%COUNT%%", {name: chat.un, count: basicBot.room.roomstats.CWRatio}));
                     }
                 }
             },
