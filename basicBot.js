@@ -2713,7 +2713,7 @@
                         var limit = msg.substring(cmd.length + 1);
                         if (!isNaN(limit)) {
                             basicBot.room.commandTime = parseInt(limit, 10);
-                            API.sendChat(subChat("[%%NAME%%] Command Limit Set To %%TIME%%", {name: chat.un, time: basicBot.room.commandTime}));
+                            API.sendChat(subChat("[%%NAME%%] Command Time Limit Set To %%TIME%%", {name: chat.un, time: basicBot.room.commandTime}));
                         }
                         else API.sendChat(subChat("[%%NAME%%] Invalid Time Specified Try Again", {name: chat.un}));
                     }
