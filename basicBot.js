@@ -899,7 +899,7 @@
 					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
 					API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio, cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
-				else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
+				else if (basicBot.room.roomstats.CWRatio < lastplay.score.positive/API.getAudience().length) {
 					var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
 					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
