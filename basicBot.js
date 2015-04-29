@@ -890,6 +890,9 @@
 			if (basicBot.room.roomstats.CWMinAudience <= API.getAudience().length) {
 				if (basicBot.room.roomstats.CWRatio === lastplay.score.positive/API.getAudience().length && basicBot.room.roomstats.CWCurates < lastplay.score.grabs) {
 					var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
+					if (u.username === 'undefined') {
+						u = basicBot.userUtilities.lookupUser(API.getDJ().id);
+					}
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
 					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
 					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
@@ -1130,10 +1133,6 @@
                     	API.moderateDeleteChat(chat.cid);
                     }, 3 * 1000, chat.cid);
                     return true;
-                }
-				
-				if (basicBot.room.currentDJID === null) {
-                    basicBot.room.currentDJID = API.getDJ().id;
                 }
 				
                 return false;
@@ -2777,7 +2776,7 @@
                 }
             },
 			
-			needtowin: {
+		needtowin: {
                 command: 'takelead',
                 rank: 'user',
                 type: 'startsWith',
