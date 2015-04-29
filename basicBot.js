@@ -911,21 +911,22 @@
 					API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio, cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
 				else if (basicBot.settings.songstats) {
-                if (typeof basicBot.chat.songstatistics === "undefined") {
-                    API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
-                }
-                else {
-                    API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
-                }
+					if (typeof basicBot.chat.songstatistics === "undefined") {
+						API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
+					}
+					else {
+						API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
+					}
+				}
 			}
-            else if (basicBot.settings.songstats) {
-                if (typeof basicBot.chat.songstatistics === "undefined") {
-                    API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
-                }
-                else {
-                    API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
-                }
-            }
+			else if (basicBot.settings.songstats) {
+				if (typeof basicBot.chat.songstatistics === "undefined") {
+					API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
+				}
+				else {
+					API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
+				}
+			}
             basicBot.room.roomstats.totalWoots += lastplay.score.positive;
             basicBot.room.roomstats.totalMehs += lastplay.score.negative;
             basicBot.room.roomstats.totalCurates += lastplay.score.grabs;
@@ -2699,7 +2700,6 @@
                     }
                 }
             },
-            
 
             CWReset: {
                 command: 'cwreset',
@@ -2715,8 +2715,10 @@
                     	basicBot.room.roomstats.CWWoots = 0;
                     	basicBot.room.roomstats.CWCurates = 0;
                     	basicBot.room.roomstats.CWMehs = 0;
-			API.sendChat("/me Current Winner Reset");
-                         }
+						basicBot.room.roomstats.CWAudience = 0;
+						basicBot.room.roomstats.CWRatio = 0;
+						API.sendChat("/me Current Winner Reset");
+                    }
                 }
             },
             
