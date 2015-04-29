@@ -1132,7 +1132,7 @@
                     return true;
                 }
 				
-				if (typeof basicBot.room.currentDJID === "undefined") {
+				if (basicBot.room.currentDJID === "undefined") {
                     basicBot.room.currentDJID = obj.dj.id;
                 }
                 
