@@ -1134,6 +1134,7 @@
 				
 				if (basicBot.room.currentDJID === null) {
                     basicBot.room.currentDJID = obj.dj.id;
+					return true;
                 }
                 
                 return false;
