@@ -2785,11 +2785,11 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-						if (basicBot.room.roomstats.CWMinAudience <= API.getAudience().length) {
-							var wootstowin = Math.round(API.getAudience().length * basicBot.room.roomstats.CWRatio);
+						if (basicBot.room.roomstats.CWMinAudience <= API.getUsers().length-1) {
+							var wootstowin = Math.round(API.getUsers().length-1 * basicBot.room.roomstats.CWRatio);
 							var grabstowin = 0;
-							if (wootstowin >= API.getAudience().length) {
-								wootstowin = API.getAudience().length;
+							if (wootstowin >= API.getUsers().length-1) {
+								wootstowin = API.getUsers().length-1;
 								grabstowin = basicBot.room.roomstats.CWCurates+1;
 								API.sendChat(subChat("[%%NAME%%] Woots & Grabs To Take The Lead - Woots: %%WOOTS%% \ Grabs: %%GRABS%%", {name: chat.un, woots: wootstowin, grabs: grabstowin}));
 							}
