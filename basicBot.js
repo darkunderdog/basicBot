@@ -318,14 +318,14 @@
                 songCount: 0,
                 chatmessages: 0,
                 commandTime: 10,
-		CWWoots: 0,
+				CWWoots: 0,
             	CWCurates: 0,
             	CWMehs: 0,
             	CWName: null,
             	CWSongName: null,
             	CWAudience: 0,
-		CWRatio: 0,
-		CWMinAudience: 14
+				CWRatio: 0,
+				CWMinAudience: 15
             },
             messages: {
                 from: [],
@@ -887,7 +887,7 @@
 
             var lastplay = obj.lastPlay;
             if (typeof lastplay === 'undefined') return;
-			if (basicBot.room.CWMinAudience <= API.getAudience().length) {
+			if (basicBot.room.roomstats.CWMinAudience <= API.getAudience().length) {
 				if (basicBot.room.roomstats.CWRatio === lastplay.score.positive/API.getAudience().length && basicBot.room.roomstats.CWCurates < lastplay.score.grabs) {
 					var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
@@ -2756,8 +2756,8 @@
                         if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Minimum Audience Amount", {name: chat.un}));
                         var limit = msg.substring(cmd.length + 1);
                         if (!isNaN(limit)) {
-                            basicBot.room.CWMinAudience = parseInt(limit, 10);
-                            API.sendChat(subChat("[%%NAME%%] Minimum Audience Set To %%AMOUNT%%", {name: chat.un, amount: basicBot.room.CWMinAudience}));
+                            basicBot.room.roomstats.CWMinAudience = parseInt(limit, 10);
+                            API.sendChat(subChat("[%%NAME%%] Minimum Audience Set To %%AMOUNT%%", {name: chat.un, amount: basicBot.room.roomstats.CWMinAudience}));
                         }
                         else API.sendChat(subChat("[%%NAME%%] Invalid Amount Specified Try Again", {name: chat.un}));
                     }
@@ -2774,6 +2774,33 @@
                     else {
 						API.sendChat(subChat("[%%NAME%%] Woot Ratio: %%RATIO%% - # Of Woots: %%WOOT%% - # Of Audience Members: %%AUDIENCE%% - # Of Grabs: %%GRAB%%", {name: chat.un, ratio: basicBot.room.roomstats.CWRatio, woot: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience, grab: basicBot.room.roomstats.CWCurates}));
                     }
+                }
+            },
+			
+			needtowin: {
+                command: 'takelead',
+                rank: 'user',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+						if (basicBot.room.roomstats.CWMinAudience <= API.getAudience().length) {
+							var wootstowin = Math.round(API.getAudience().length * basicBot.room.roomstats.CWRatio);
+							var grabstowin = 0;
+							if (wootstowin >= API.getAudience().length) {
+								wootstowin = API.getAudience().length;
+								grabstowin = basicBot.room.roomstats.CWCurates+1;
+								API.sendChat(subChat("[%%NAME%%] Woots & Grabs To Take The Lead - Woots: %%WOOTS%% \ Grabs: %%GRABS%%", {name: chat.un, woots: wootstowin, grabs: grabstowin}));
+							}
+							else{
+							API.sendChat(subChat("[%%NAME%%] Woots To Take The Lead: %%WOOTS%%", {name: chat.un, woots: wootstowin}));
+							}
+						}
+						else {
+							API.sendChat(subChat("[%%NAME%%] You need a minimum of %%AUDIENCE%% people in the audience to be able to take the lead", {name: chat.un, audience: basicBot.room.roomstats.CWMinAudience}));
+						}
+					}
                 }
             },
 
