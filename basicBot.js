@@ -318,14 +318,14 @@
                 songCount: 0,
                 chatmessages: 0,
                 commandTime: 10,
-				CWWoots: 0,
+		CWWoots: 0,
             	CWCurates: 0,
             	CWMehs: 0,
             	CWName: null,
             	CWSongName: null,
             	CWAudience: 0,
-				CWRatio: 0,
-				CWMinAudience: 10
+		CWRatio: 0,
+		CWMinAudience: 14
             },
             messages: {
                 from: [],
