@@ -1133,10 +1133,9 @@
                 }
 				
 				if (basicBot.room.currentDJID === null) {
-                    basicBot.room.currentDJID = obj.dj.id;
-					return true;
+                    basicBot.room.currentDJID = API.getDJ().id;
                 }
-                
+				
                 return false;
             },
             commandCheck: function (chat) {
