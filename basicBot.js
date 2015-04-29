@@ -266,7 +266,7 @@
             motdEnabled: true,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            currentwinner: "/me Current Winner: %%CWNAME%% Song: %%CWSONGNAME%% Woots: %%CWWOOTS%% Grabs: %%CWCURATES%% Meh: %%CWMEHS%%",
+            currentwinner: "/me Current Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - Woots: %%CWWOOTS%% - Audience: %%AUDIENCE%% - Grabs: %%CWCURATES%% - Mehs: %%CWMEHS%%",
             filterChat: true,
             etaRestriction: false,
             welcome: true,
@@ -318,13 +318,14 @@
                 songCount: 0,
                 chatmessages: 0,
                 commandTime: 10,
-		CWWoots: 0,
+				CWWoots: 0,
             	CWCurates: 0,
             	CWMehs: 0,
             	CWName: null,
             	CWSongName: null,
             	CWAudience: 0,
-        	CWRatio: 0
+				CWRatio: 0,
+				CWMinAudience: 10
             },
             messages: {
                 from: [],
@@ -886,28 +887,37 @@
 
             var lastplay = obj.lastPlay;
             if (typeof lastplay === 'undefined') return;
-            if (basicBot.room.roomstats.CWWoots === lastplay.score.positive && basicBot.room.roomstats.CWCurates < lastplay.score.grabs) {
-            	var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
-            	basicBot.room.roomstats.CWWoots = lastplay.score.positive;
-                basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
-                basicBot.room.roomstats.CWMehs = lastplay.score.negative;
-                basicBot.room.roomstats.CWSongName = lastplay.media.title;
-                basicBot.room.roomstats.CWName = u.username;
-        	basicBot.room.roomstats.CWAudience = API.getAudience().length;
-        	basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
-                API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
-            }
-            else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
-            	var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
-		basicBot.room.roomstats.CWWoots = lastplay.score.positive;
-                basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
-                basicBot.room.roomstats.CWMehs = lastplay.score.negative;
-                basicBot.room.roomstats.CWSongName = lastplay.media.title;
-                basicBot.room.roomstats.CWName = u.username;
-                basicBot.room.roomstats.CWAudience = API.getAudience().length;
-        	basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
-                API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, cwwoots: basicBot.room.roomstats.CWWoots, cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
-            }
+			if (basicBot.room.CWMinAudience >= API.getAudience().length) {
+				if (basicBot.room.roomstats.CWRatio === lastplay.score.positive/API.getAudience().length && basicBot.room.roomstats.CWCurates < lastplay.score.grabs) {
+					var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
+					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
+					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
+					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
+					basicBot.room.roomstats.CWSongName = lastplay.media.title;
+					basicBot.room.roomstats.CWName = u.username;
+					basicBot.room.roomstats.CWAudience = API.getAudience().length;
+					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
+					API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio, cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
+				}
+				else if (basicBot.room.roomstats.CWWoots < lastplay.score.positive) {
+					var u = basicBot.userUtilities.lookupUser(basicBot.room.currentDJID);
+					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
+					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
+					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
+					basicBot.room.roomstats.CWSongName = lastplay.media.title;
+					basicBot.room.roomstats.CWName = u.username;
+					basicBot.room.roomstats.CWAudience = API.getAudience().length;
+					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
+					API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio, cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
+				}
+				else if (basicBot.settings.songstats) {
+                if (typeof basicBot.chat.songstatistics === "undefined") {
+                    API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
+                }
+                else {
+                    API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
+                }
+			}
             else if (basicBot.settings.songstats) {
                 if (typeof basicBot.chat.songstatistics === "undefined") {
                     API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
@@ -1120,6 +1130,10 @@
                     }, 3 * 1000, chat.cid);
                     return true;
                 }
+				
+				if (typeof basicBot.room.currentDJID === "undefined") {
+                    basicBot.room.currentDJID = obj.dj.id;
+                }
                 
                 return false;
             },
@@ -1187,8 +1201,8 @@
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var timelimit = basicBot.room.commandTime;
                         var diff = (60*timelimit) - (((Date.now() - u.last8ball) / 1000) | 0);
-        		var minutes = (diff / 60) | 0;
-        		var seconds = (diff % 60) | 0;
+						var minutes = (diff / 60) | 0;
+						var seconds = (diff % 60) | 0;
                         if (u.last8ball !== null && (Date.now() - u.last8ball) < 1 * 60 * timelimit * 1000) {
                             API.moderateDeleteChat(chat.cid);
                             API.sendChat("[!8ball] @" + u.username + " you must wait " + minutes + ":" + seconds + " minutes.");
@@ -2725,6 +2739,26 @@
                     }
                 }
             },
+			
+			    CWMinAudiencecmd: {
+                command: 'cwm',
+                rank: 'manager',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+                        if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Minimum Audience Amount", {name: chat.un}));
+                        var limit = msg.substring(cmd.length + 1);
+                        if (!isNaN(limit)) {
+                            basicBot.room.CWMinAudience = parseInt(limit, 10);
+                            API.sendChat(subChat("[%%NAME%%] Minimum Audience Set To %%AMOUNT%%", {name: chat.un, amount: basicBot.room.CWMinAudience}));
+                        }
+                        else API.sendChat(subChat("[%%NAME%%] Invalid Amount Specified Try Again", {name: chat.un}));
+                    }
+                }
+            },
 
             testCommand: {
                 command: 'tt',
@@ -2734,7 +2768,7 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-			API.sendChat(subChat("[%%NAME%%] Woot Ratio: %%RATIO%% - # Of Woots: %%WOOT%% - # Of Audience Members: %%AUDIENCE%% - # Of Grabs: %%GRAB%%", {name: chat.un, ratio: basicBot.room.roomstats.CWRatio, woot: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience, grab: basicBot.room.roomstats.CWCurates}));
+						API.sendChat(subChat("[%%NAME%%] Woot Ratio: %%RATIO%% - # Of Woots: %%WOOT%% - # Of Audience Members: %%AUDIENCE%% - # Of Grabs: %%GRAB%%", {name: chat.un, ratio: basicBot.room.roomstats.CWRatio, woot: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience, grab: basicBot.room.roomstats.CWCurates}));
                     }
                 }
             },
