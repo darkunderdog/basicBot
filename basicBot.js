@@ -2780,7 +2780,7 @@
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
 						if (basicBot.room.roomstats.CWMinAudience <= API.getUsers().length-1) {
-							var wootstowin = Math.round((API.getUsers().length-1) * basicBot.room.roomstats.CWRatio);
+							var wootstowin = Math.ceil((API.getUsers().length-1) * basicBot.room.roomstats.CWRatio);
 							var grabstowin = 0;
 							if (wootstowin >= API.getUsers().length-1) {
 								wootstowin = API.getUsers().length-1;
