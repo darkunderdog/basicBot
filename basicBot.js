@@ -266,8 +266,9 @@
             motdEnabled: true,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            currentwinner: "/me Current Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - Woots: %%CWWOOTS%% - Audience: %%AUDIENCE%% - Grabs: %%CWCURATES%% - Mehs: %%CWMEHS%%",
-            filterChat: true,
+            currentwinner: "/me Current Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1: %%CWWOOTS%% / :family: %%AUDIENCE%% / :punch: %%CWCURATES%% / :-1: %%CWMEHS%%",
+            nochangecw: "/me :star::star2: @%%CWNAME%% Is Still The Current Winner :star2::star:   Type !currentwinner or !takelead to get additional details",
+			filterChat: true,
             etaRestriction: false,
             welcome: true,
             opLink: null,
@@ -908,6 +909,9 @@
 					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
 					API.sendChat(subChat(basicBot.settings.currentwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
+				else if (basicBot.room.roomstats.CWName !== "" && basicBot.room.roomstats.CWName !== null) {
+					API.sendChat(subChat(basicBot.settings.nochangecw, {cwname: basicBot.room.roomstats.CWName}));
+				}
 				else if (basicBot.settings.songstats) {
 					if (typeof basicBot.chat.songstatistics === "undefined") {
 						API.sendChat("/me " + lastplay.media.author + " - " + lastplay.media.title + ": " + lastplay.score.positive + "W/" + lastplay.score.grabs + "G/" + lastplay.score.negative + "M.")
@@ -916,6 +920,9 @@
 						API.sendChat(subChat(basicBot.chat.songstatistics, {artist: lastplay.media.author, title: lastplay.media.title, woots: lastplay.score.positive, grabs: lastplay.score.grabs, mehs: lastplay.score.negative}))
 					}
 				}
+			}
+			else if (basicBot.room.roomstats.CWName !== "" && basicBot.room.roomstats.CWName !== null) {
+				API.sendChat(subChat(basicBot.settings.nochangecw, {cwname: basicBot.room.roomstats.CWName}));
 			}
 			else if (basicBot.settings.songstats) {
 				if (typeof basicBot.chat.songstatistics === "undefined") {
@@ -1130,6 +1137,10 @@
                     return true;
                 }
 				
+				if (msg.substr(0,1) === '!') {
+					API.moderateDeleteChat(chat.cid);
+				}
+				
                 return false;
             },
             commandCheck: function (chat) {
@@ -1254,21 +1265,22 @@
                     }
                 }
 
-                if (executed && userPerm === 0) {
-                    basicBot.room.usercommand = false;
-                    setTimeout(function () {
-                        basicBot.room.usercommand = true;
-                    }, basicBot.settings.commandCooldown * 1000);
-                }
-                if (executed) {
-                    if (basicBot.settings.cmdDeletion) {
-                        API.moderateDeleteChat(chat.cid);
-                    }
-                    basicBot.room.allcommand = false;
-                    setTimeout(function () {
-                        basicBot.room.allcommand = true;
-                    }, 5 * 1000);
-                }
+                //*if (executed && userPerm === 0) {
+                //*    basicBot.room.usercommand = false;
+                //*    setTimeout(function () {
+                //*        basicBot.room.usercommand = true;
+                //*    }, basicBot.settings.commandCooldown * 1000);
+                //*}
+				
+                //*if (executed) {
+                //*    if (basicBot.settings.cmdDeletion) {
+                //*        API.moderateDeleteChat(chat.cid);
+                //*    }
+                //*    basicBot.room.allcommand = false;
+                //*    setTimeout(function () {
+                //*        basicBot.room.allcommand = true;
+                //*    }, 5 * 1000);
+                //*}
                 return executed;
             },
             action: function (chat) {
