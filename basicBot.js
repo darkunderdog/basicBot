@@ -1162,7 +1162,7 @@
                 if (chat.message.indexOf('!gif') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        var timelimit = basicBot.room.commandTime;
+                        var timelimit = basicBot.room.roomstats.commandTime;
                         var diff = (60*timelimit) - (((Date.now() - u.lastGif) / 1000) | 0);
         		var minutes = (diff / 60) | 0;
         		var seconds = (diff % 60) | 0;
@@ -1178,7 +1178,7 @@
                 if (chat.message.indexOf('!kitty') >= 0 || chat.message.indexOf('!meow') >= 0)  {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        var timelimit = basicBot.room.commandTime;
+                        var timelimit = basicBot.room.roomstats.commandTime;
                         var diff = (60*timelimit) - (((Date.now() - u.lastGif) / 1000) | 0);
         		var minutes = (diff / 60) | 0;
         		var seconds = (diff % 60) | 0;
@@ -1194,7 +1194,7 @@
                 if (chat.message.indexOf('!8ball') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        var timelimit = basicBot.room.commandTime;
+                        var timelimit = basicBot.room.roomstats.commandTime;
                         var diff = (60*timelimit) - (((Date.now() - u.last8ball) / 1000) | 0);
 						var minutes = (diff / 60) | 0;
 						var seconds = (diff % 60) | 0;
@@ -1210,7 +1210,7 @@
                 if (chat.message.indexOf('!cookie') >= 0) {
                     if (userPerm < 2) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
-                        var timelimit = basicBot.room.commandTime;
+                        var timelimit = basicBot.room.roomstats.commandTime;
                         var diff = (60*timelimit) - (((Date.now() - u.lastCookie) / 1000) | 0);
         		var minutes = (diff / 60) | 0;
         		var seconds = (diff % 60) | 0;
@@ -2730,8 +2730,8 @@
                         if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Command Time Limit", {name: chat.un}));
                         var limit = msg.substring(cmd.length + 1);
                         if (!isNaN(limit)) {
-                            basicBot.room.commandTime = parseInt(limit, 10);
-                            API.sendChat(subChat("[%%NAME%%] Command Time Limit Set To %%TIME%%", {name: chat.un, time: basicBot.room.commandTime}));
+                            basicBot.room.roomstats.commandTime = parseInt(limit, 10);
+                            API.sendChat(subChat("[%%NAME%%] Command Time Limit Set To %%TIME%%", {name: chat.un, time: basicBot.room.roomstats.commandTime}));
                         }
                         else API.sendChat(subChat("[%%NAME%%] Invalid Time Specified Try Again", {name: chat.un}));
                     }
