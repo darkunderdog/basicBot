@@ -266,7 +266,7 @@
             motdEnabled: true,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            currentwinner: "/me Current Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1: %%CWWOOTS%% \ :family: %%AUDIENCE%% \ :punch: %%CWCURATES%% \ :-1: %%CWMEHS%%",
+            currentwinner: "/me Current Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1: %%CWWOOTS%% :family: %%AUDIENCE%% :punch: %%CWCURATES%% :-1: %%CWMEHS%%",
             nochangecw: "/me :star::star2: @%%CWNAME%% Is Still The Current Winner :star2::star:   Type !currentwinner or !takelead to get additional details",
 			filterChat: true,
             etaRestriction: false,
