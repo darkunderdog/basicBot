@@ -890,26 +890,26 @@
 
             var lastplay = obj.lastPlay;
             if (typeof lastplay === 'undefined') return;
-			if (basicBot.room.roomstats.CWMinAudience <= API.getAudience().length) {
-				if (basicBot.room.roomstats.CWRatio === lastplay.score.positive/API.getAudience().length && basicBot.room.roomstats.CWCurates < lastplay.score.grabs) {
+			if (basicBot.room.roomstats.CWMinAudience <= API.getUsers().length) {
+				if (basicBot.room.roomstats.CWRatio === lastplay.score.positive/API.getUsers().length && basicBot.room.roomstats.CWCurates < lastplay.score.grabs) {
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
 					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
 					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
 					basicBot.room.roomstats.CWSongName = lastplay.media.title;
 					basicBot.room.roomstats.CWName = lastplay.dj.username;
-					basicBot.room.roomstats.CWAudience = API.getAudience().length;
-					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
+					basicBot.room.roomstats.CWAudience = API.getUsers().length;
+					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getUsers().length;
 					basicBot.room.roomstats.CWCount = 0;
 					API.sendChat(subChat(basicBot.settings.newwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
-				else if (basicBot.room.roomstats.CWRatio < lastplay.score.positive/API.getAudience().length) {
+				else if (basicBot.room.roomstats.CWRatio < lastplay.score.positive/API.getUsers().length) {
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
 					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
 					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
 					basicBot.room.roomstats.CWSongName = lastplay.media.title;
 					basicBot.room.roomstats.CWName = lastplay.dj.username;
-					basicBot.room.roomstats.CWAudience = API.getAudience().length;
-					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getAudience().length;
+					basicBot.room.roomstats.CWAudience = API.getUsers().length;
+					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getUsers().length;
 					basicBot.room.roomstats.CWCount = 0;
 					API.sendChat(subChat(basicBot.settings.newwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
@@ -2752,7 +2752,7 @@
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                         var msg = chat.message;
-                        if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Command Time Limit", {name: chat.un}));
+                        if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Command Time Limit - Currently Set To %%TIME%%", {name: chat.un, time: basicBot.room.roomstats.commandTime}));
                         var limit = msg.substring(cmd.length + 1);
                         if (!isNaN(limit)) {
                             basicBot.room.roomstats.commandTime = parseInt(limit, 10);
@@ -2772,7 +2772,7 @@
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                         var msg = chat.message;
-                        if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Minimum Audience Amount", {name: chat.un}));
+                        if (msg.length === cmd.length) return API.sendChat(subChat("[%%NAME%%] Please Specify A Minimum Audience Amount - Currently Set To %%AUDIENCE%%", {name: chat.un, audience: basicBot.room.roomstats.CWMinAudience}));
                         var limit = msg.substring(cmd.length + 1);
                         if (!isNaN(limit)) {
                             basicBot.room.roomstats.CWMinAudience = parseInt(limit, 10);
@@ -2804,11 +2804,11 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-						if (basicBot.room.roomstats.CWMinAudience <= API.getUsers().length-1) {
-							var wootstowin = Math.ceil((API.getUsers().length-1) * basicBot.room.roomstats.CWRatio);
+						if (basicBot.room.roomstats.CWMinAudience <= API.getUsers().length) {
+							var wootstowin = Math.ceil((API.getUsers().length) * basicBot.room.roomstats.CWRatio);
 							var grabstowin = 0;
-							if (wootstowin >= API.getUsers().length-1) {
-								wootstowin = API.getUsers().length-1;
+							if (wootstowin >= API.getUsers().length) {
+								wootstowin = API.getUsers().length;
 								grabstowin = basicBot.room.roomstats.CWCurates+1;
 								API.sendChat(subChat("[%%NAME%%] Woots & Grabs To Take The Lead - Woots: %%WOOTS%% \ Grabs: %%GRABS%%", {name: chat.un, woots: wootstowin, grabs: grabstowin}));
 							}
@@ -2816,10 +2816,11 @@
 								if (wootstowin === 0) {
 									wootstowin = 1;
 								}
-								if (wootstowin === basicBot.room.roomstats.CWWoots && wootstowin < API.getUsers().length-1) {
+								if (wootstowin === basicBot.room.roomstats.CWWoots && wootstowin < API.getUsers().length) {
 									wootstowin++;
-								}	
-							API.sendChat(subChat("[%%NAME%%] Woots To Take The Lead: %%WOOTS%%", {name: chat.un, woots: wootstowin}));
+								}
+							var woots2winratio = wootstowin/API.getUsers().length;
+							API.sendChat(subChat("[%%NAME%%] Woot Ratio / Woots To Take The Lead: Ratio: %%WOOTRATIO%% - :+1:%%WOOTS%%", {name: chat.un, wootratio: woots2winratio.toFixed(2), woots: wootstowin}));
 							}
 						}
 						else {
