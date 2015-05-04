@@ -12,10 +12,6 @@
             id = API.getUser().id;
         }
         var wl = API.getWaitList();
-        for(var i = 0; i < wl.length; i++){
-            if(wl[i].id === id){
-                return i;
-            }
         }
         return -1;
     };
@@ -2243,7 +2239,7 @@
                                     )
                             }
                             var api_key = "dc6zaTOxFJmzC"; // public beta key
-                            var rating = ""; // PG 13 gifs
+                            var rating = "pg-13"; // PG 13 gifs
                             var tag = msg.substr(cmd.length + 1);
                             var fixedtag = tag.replace(/ /g,"+");
                             var commatag = tag.replace(/ /g,", ");
@@ -2273,7 +2269,7 @@
                                     )
                             }
                             var api_key = "dc6zaTOxFJmzC"; // public beta key
-                            var rating = ""; // PG 13 gifs
+                            var rating = "pg-13"; // PG 13 gifs
                             get_random_id(api_key, function(id) {
                                 if (typeof id !== 'undefined') {
                                     API.sendChat(subChat(basicBot.chat.validgifrandom, {name: chat.un, id: id}));
@@ -2314,7 +2310,7 @@
 								)
 						}
 						var api_key = "dc6zaTOxFJmzC"; // public beta key
-						var rating = ""; // PG 13 gifs
+						var rating = "pg-13"; // PG 13 gifs
 						get_random_id(api_key, function(id) {
 							if (typeof id !== 'undefined') {
 									API.sendChat(subChat("[%%NAME%%] :heart_eyes_cat: :kissing_cat: :smile_cat: :joy_cat: http://media.giphy.com/media/%%ID%%/giphy.gif :cat: :octocat: :cat2:", {name: u.username, id: id}));
