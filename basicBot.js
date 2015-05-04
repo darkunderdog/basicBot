@@ -1186,7 +1186,7 @@
                 }
                 
                 if (chat.message.indexOf('!gif') >= 0) {
-                    if (userPerm < 2) {
+                    if (userPerm < 8) {
                         var u = basicBot.userUtilities.lookupUser(chat.uid);
                         var timelimit = basicBot.room.roomstats.commandTime;
                         var diff = (60*timelimit) - (((Date.now() - u.lastGif) / 1000) | 0);
