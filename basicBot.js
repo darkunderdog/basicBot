@@ -2245,7 +2245,7 @@
                             }
                             var api_key = "dc6zaTOxFJmzC"; // public beta key
                             var rating = "pg-13"; // PG 13 gifs
-                            var size = "976762";
+                            var size = "776762";
                             var tag = msg.substr(cmd.length + 1);
                             var fixedtag = tag.replace(/ /g,"+");
                             var commatag = tag.replace(/ /g,", ");
@@ -2276,7 +2276,7 @@
                                     )
                             }
                             var api_key = "dc6zaTOxFJmzC"; // public beta key
-                            var size = "976762";
+                            var size = "776762";
                             var rating = "pg-13"; // PG 13 gifs
                             get_random_id(api_key, function(id) {
                                 if (typeof id !== 'undefined') {
@@ -2319,7 +2319,7 @@
 								)
 						}
 						var api_key = "dc6zaTOxFJmzC"; // public beta key
-						var size = "976762";
+						var size = "776762";
 						var rating = "pg-13"; // PG 13 gifs
 						get_random_id(api_key, function(id) {
 							if (typeof id !== 'undefined') {
