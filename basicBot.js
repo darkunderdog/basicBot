@@ -266,8 +266,8 @@
             motdEnabled: false,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            newwinner: "/me :fireworks: New Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1:%%CWWOOTS%% :family:%%AUDIENCE%% :punch:%%CWCURATES%% :-1:%%CWMEHS%%",
-			currentwinner: "/me :sparkler: Current Winner: @%%CWNAME%% - Song: %%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1:%%CWWOOTS%% :family:%%AUDIENCE%% :punch:%%CWCURATES%% :-1:%%CWMEHS%%",
+            newwinner: "/me :fireworks: New Winner: @%%CWNAME%% - Song: %%CWMEDIA%%-%%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1:%%CWWOOTS%% :family:%%AUDIENCE%% :punch:%%CWCURATES%% :-1:%%CWMEHS%%",
+			currentwinner: "/me :sparkler: Current Winner: @%%CWNAME%% - Song: %%CWMEDIA%%-%%CWSONGNAME%% - Woot Ratio: %%RATIO%% - :+1:%%CWWOOTS%% :family:%%AUDIENCE%% :punch:%%CWCURATES%% :-1:%%CWMEHS%%",
             nochangecw: "/me :star::star2: @%%CWNAME%% Is Still The Current Winner :star2::star:   Type !currentwinner or !takelead to get additional details",
 			filterChat: true,
             etaRestriction: false,
@@ -321,6 +321,7 @@
                 chatmessages: 0,
                 commandTime: 10,
 				CWWoots: 0,
+				CWMedia: null,
             	CWCurates: 0,
             	CWMehs: 0,
             	CWName: null,
@@ -895,23 +896,25 @@
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
 					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
 					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
+					basicBot.room.roomstats.CWMedia = lastplay.media.author;
 					basicBot.room.roomstats.CWSongName = lastplay.media.title;
 					basicBot.room.roomstats.CWName = lastplay.dj.username;
 					basicBot.room.roomstats.CWAudience = API.getUsers().length;
 					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getUsers().length;
 					basicBot.room.roomstats.CWCount = 0;
-					API.sendChat(subChat(basicBot.settings.newwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
+					API.sendChat(subChat(basicBot.settings.newwinner, {cwname: basicBot.room.roomstats.CWName, cwmedia: basicBot.room.roomstats.CWMedia,cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
 				else if (basicBot.room.roomstats.CWRatio < lastplay.score.positive/API.getUsers().length) {
 					basicBot.room.roomstats.CWWoots = lastplay.score.positive;
 					basicBot.room.roomstats.CWCurates = lastplay.score.grabs;
 					basicBot.room.roomstats.CWMehs = lastplay.score.negative;
+					basicBot.room.roomstats.CWMedia = lastplay.media.author;
 					basicBot.room.roomstats.CWSongName = lastplay.media.title;
 					basicBot.room.roomstats.CWName = lastplay.dj.username;
 					basicBot.room.roomstats.CWAudience = API.getUsers().length;
 					basicBot.room.roomstats.CWRatio = lastplay.score.positive/API.getUsers().length;
 					basicBot.room.roomstats.CWCount = 0;
-					API.sendChat(subChat(basicBot.settings.newwinner, {cwname: basicBot.room.roomstats.CWName, cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
+					API.sendChat(subChat(basicBot.settings.newwinner, {cwname: basicBot.room.roomstats.CWName, cwmedia: basicBot.room.roomstats.CWMedia,cwsongname: basicBot.room.roomstats.CWSongName, ratio: basicBot.room.roomstats.CWRatio.toFixed(2), cwwoots: basicBot.room.roomstats.CWWoots, audience: basicBot.room.roomstats.CWAudience ,cwcurates: basicBot.room.roomstats.CWCurates, cwmehs: basicBot.room.roomstats.CWMehs}));
 				}
 				else if (basicBot.room.roomstats.CWName !== "" && basicBot.room.roomstats.CWName !== null && basicBot.room.roomstats.CWCount === 3) {
 					setTimeout(function(){ API.sendChat(subChat(basicBot.settings.nochangecw, {cwname: basicBot.room.roomstats.CWName})); }, 10000);
@@ -1652,11 +1655,12 @@
                         var grabs = basicBot.room.roomstats.CWCurates;
 						var ratio = basicBot.room.roomstats.CWRatio;
 						var audience = basicBot.room.roomstats.CWAudience;
+						var media = basicBot.room.roomstats.CWMedia;
 						if (currentwinner === "" || currentwinner === null) {
 							API.sendChat("/me No Current Winner");
                     	}
                     		else {
-                    			API.sendChat(subChat(basicBot.settings.currentwinner, {cwname:currentwinner, cwsongname: song, ratio: ratio.toFixed(2), cwwoots: woots, audience: audience, cwcurates: grabs, cwmehs: mehs}));
+                    			API.sendChat(subChat(basicBot.settings.currentwinner, {cwname:currentwinner, cwmedia: media,cwsongname: song, ratio: ratio.toFixed(2), cwwoots: woots, audience: audience, cwcurates: grabs, cwmehs: mehs}));
                     		}
                  
                          }
@@ -2733,6 +2737,7 @@
                     	basicBot.room.roomstats.CWName = "";
                     	basicBot.room.roomstats.CWSongName = "";
                     	basicBot.room.roomstats.CWWoots = 0;
+						basicBot.room.roomstats.CWMedia = "";
                     	basicBot.room.roomstats.CWCurates = 0;
                     	basicBot.room.roomstats.CWMehs = 0;
 						basicBot.room.roomstats.CWAudience = 0;
