@@ -2229,7 +2229,7 @@
                             function get_id(api_key, fixedtag, func)
                             {
                                 $.getJSON(
-                                    "https://i.giphy.com/v1/gifs/random?", 
+                                    "https://media0.giphy.com/v1/gifs/random?", 
                                     { 
                                         "format": "json",
                                         "api_key": api_key,
@@ -2262,7 +2262,7 @@
                             function get_random_id(api_key, func)
                             {
                                 $.getJSON(
-                                    "https://i.giphy.com/v1/gifs/random?", 
+                                    "https://media0.giphy.com/v1/gifs/random?", 
                                     { 
                                         "format": "json",
                                         "api_key": api_key,
@@ -2304,7 +2304,7 @@
 						function get_random_id(api_key, func)
 						{
 							$.getJSON(
-								"https://i.giphy.com/v1/gifs/random?", 
+								"https://media0.giphy.com/v1/gifs/random?", 
 								{ 
 									"format": "json",
 									"api_key": api_key,
