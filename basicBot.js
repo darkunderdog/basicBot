@@ -2234,7 +2234,6 @@
                                         "format": "json",
                                         "api_key": api_key,
                                         "rating": rating,
-                                        "size": size,
                                         "tag": fixedtag
                                     },
                                     function(response)
@@ -2245,7 +2244,6 @@
                             }
                             var api_key = "dc6zaTOxFJmzC"; // public beta key
                             var rating = "pg-13"; // PG 13 gifs
-                            var size = "6762";
                             var tag = msg.substr(cmd.length + 1);
                             var fixedtag = tag.replace(/ /g,"+");
                             var commatag = tag.replace(/ /g,", ");
@@ -2266,7 +2264,6 @@
                                     { 
                                         "format": "json",
                                         "api_key": api_key,
-                                        "size": size,
                                         "rating": rating
                                     },
                                     function(response)
@@ -2276,7 +2273,6 @@
                                     )
                             }
                             var api_key = "dc6zaTOxFJmzC"; // public beta key
-                            var size = "6762";
                             var rating = "pg-13"; // PG 13 gifs
                             get_random_id(api_key, function(id) {
                                 if (typeof id !== 'undefined') {
@@ -2308,7 +2304,6 @@
 								{ 
 									"format": "json",
 									"api_key": api_key,
-									"size": size,
 									"rating": rating,
 									"tag": "kitty"
 								},
@@ -2319,7 +2314,6 @@
 								)
 						}
 						var api_key = "dc6zaTOxFJmzC"; // public beta key
-						var size = "6762";
 						var rating = "pg-13"; // PG 13 gifs
 						get_random_id(api_key, function(id) {
 							if (typeof id !== 'undefined') {
