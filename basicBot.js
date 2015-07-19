@@ -2815,7 +2815,7 @@
 							if (wootstowin >= API.getUsers().length) {
 								wootstowin = API.getUsers().length;
 								grabstowin = basicBot.room.roomstats.CWCurates+1;
-								API.sendChat(subChat("[%%NAME%%] Woots & Grabs To Take The Lead - Woots: %%WOOTS%% \ Grabs: %%GRABS%%", {name: chat.un, woots: wootstowin, grabs: grabstowin}));
+								API.sendChat(subChat("[%%NAME%%] Woots & Grabs To Take The Lead - Woots: %%WOOTS%% \ Grabs: %%GRABS%% -- :family:%%AUDIENCE%%", {name: chat.un, woots: wootstowin, grabs: grabstowin,audience: API.getUsers().length}));
 							}
 							else{
 								if (wootstowin === 0) {
@@ -2825,7 +2825,7 @@
 									wootstowin++;
 								}
 							var woots2winratio = wootstowin/API.getUsers().length;
-							API.sendChat(subChat("[%%NAME%%] Woot Ratio / Woots To Take The Lead: Ratio: %%WOOTRATIO%% - :+1:%%WOOTS%%", {name: chat.un, wootratio: woots2winratio.toFixed(2), woots: wootstowin}));
+							API.sendChat(subChat("[%%NAME%%] Woot Ratio / Woots To Take The Lead: Ratio: %%WOOTRATIO%% - :+1:%%WOOTS%% -- :family:%%AUDIENCE%%", {name: chat.un, wootratio: woots2winratio.toFixed(2), woots: wootstowin,audience: API.getUsers().length}));
 							}
 						}
 						else {
